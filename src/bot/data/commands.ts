@@ -1,54 +1,107 @@
-export const commands = {
-  SPAM: {
+import { handleCountMyMessages } from "../commands/count-messages";
+import { handleHelp } from "../commands/help";
+import {
+  handleAddToHiatus,
+  handleHiatusMe,
+  handleRemoveFromHiatus,
+  handleUnhiatusMe,
+} from "../commands/hiatus";
+import { handleHug } from "../commands/hug";
+import { handleKick } from "../commands/kick";
+import { handleKiss } from "../commands/kiss";
+import { handleAddPoints, handleAddPointsTemplate } from "../commands/points";
+import { sendSpam } from "../commands/spam";
+import { Commands } from "../enums/commands.enum";
+import { Permission } from "../enums/permission.enum";
+import { CommandHandler } from "../interfaces/command";
+
+export const commands: Record<Commands, CommandHandler> = {
+  [Commands.SPAM]: {
     command: "!spam",
     description:
       "Envía un mensaje etiquetado a todos los miembros del grupo que no están en hiatus.",
+    permission: Permission.ADMIN,
+    check: (body: string) => body === "!spam",
+    run: async (_, chat) => sendSpam(chat),
   },
-  HIATUS: {
+  [Commands.HIATUS]: {
     command: "!hiatus",
     description: "Añade a un usuario de tu selección al modo hiatus.",
+    permission: Permission.ADMIN,
+    check: (body: string) => body.startsWith(`!hiatus `),
+    run: async (message, _) => handleAddToHiatus(message),
   },
-  UNHIATUS: {
+  [Commands.UNHIATUS]: {
     command: "!unhiatus",
     description: "Remueve a un usuario de tu selección del modo hiatus.",
+    permission: Permission.ADMIN,
+    check: (body: string) => body.startsWith(`!unhiatus `),
+    run: async (message, _) => handleRemoveFromHiatus(message),
   },
-  HIATUSME: {
+  [Commands.HIATUSME]: {
     command: "!hiatusme",
-    description: "Te añade a ti mismo al modo hiatus.",
+    description: "Te retira del spam general del grupo.",
+    permission: Permission.EVERYONE,
+    check: (body: string) => body === "!hiatusme",
+    run: async (message, chat) => handleHiatusMe(message, chat),
   },
-  UNHIATUSME: {
+  [Commands.UNHIATUSME]: {
     command: "!unhiatusme",
-    description: "Te remueve a ti mismo del modo hiatus.",
+    description: "Te agrega al spam general del grupo.",
+    permission: Permission.EVERYONE,
+    check: (body: string) => body === "!unhiatusme",
+    run: async (message, chat) => handleUnhiatusMe(message, chat),
   },
-  COUNTMYMESSAGES: {
-    command: "!countmymessages",
+  [Commands.COUNTMYMESSAGES]: {
+    command: "!contarmismensajes",
     description:
-      "Cuenta los mensajes enviados por el usuario en el grupo o desde el mensaje que se envió el comando.",
+      "Si respondes a un mensaje, cuenta los mensajes que has enviado desde entonces. \nSi no, cuenta los mensajes que has enviado desde siempre.",
+    permission: Permission.ME,
+    check: (body: string) => body === "!contarmismensajes",
+    run: async (message, chat) => handleCountMyMessages(message, chat),
   },
-  SETPOINTSTEMPLATE: {
-    command: "!setpointstemplate",
+  [Commands.SETPOINTSTEMPLATE]: {
+    command: "!plantillapuntos",
     description:
-      "Establece el template de puntos para el grupo. Usa !setpointstemplate [template].",
+      "Establece la plantilla de puntos para el grupo. \nEjemplo: \n!plantillapuntos \n[template].",
+    permission: Permission.ADMIN,
+    check: (body: string) => body.startsWith(`!plantillapuntos `),
+    run: async (message, chat) => handleAddPointsTemplate(message, chat),
   },
-  ADDPOINTS: {
+  [Commands.ADDPOINTS]: {
     command: "!sumarpuntos",
     description:
-      "Suma los puntos del grupo desde el mensaje que se citó en el comando.",
+    "Suma los puntos del grupo desde el mensaje que se citó en el comando.",
+    permission: Permission.ADMIN,
+    check: (body: string) => body === "!sumarpuntos",
+    run: async (message, chat) => handleAddPoints(message, chat),
   },
-  KICK: {
+  [Commands.KICK]: {
     command: "!kick",
     description: "Le das una patada a un usuario del grupo.",
+    permission: Permission.EVERYONE,
+    check: (body: string) => body === "!kick",
+    run: async (message, chat) => handleKick(message, chat),
   },
-  KISS: {
+  [Commands.KISS]: {
     command: "!kiss",
     description: "Le das un beso a un usuario del grupo.",
+    permission: Permission.EVERYONE,
+    check: (body: string) => body === "!kiss",
+    run: async (message, chat) => handleKiss(message, chat),
   },
-  HUG: {
+  [Commands.HUG]: {
     command: "!hug",
     description: "Le das un abrazo a un usuario del grupo.",
+    permission: Permission.EVERYONE,
+    check: (body: string) => body === "!hug",
+    run: async (message, chat) => handleHug(message, chat),
   },
-  HELP: {
+  [Commands.HELP]: {
     command: "!help",
     description: "Muestra la lista de comandos disponibles.",
+    permission: Permission.EVERYONE,
+    check: (body: string) => body === "!help",
+    run: async (message, chat) => handleHelp(message),
   },
 };
