@@ -1,0 +1,16 @@
+
+# Node_modules 
+node_modules
+
+# Build artifacts
+dist
+
+# Variable files
+*.log
+*.env
+*.local
+.package-lock.json
+
+# Whatsapp-web.js files
+.wwebjs_auth
+.wwebjs_cache
