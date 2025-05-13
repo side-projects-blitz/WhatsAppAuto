@@ -8,6 +8,8 @@ export async function onMessageCreate(message: Message) {
 
   const body = message.body.toLowerCase();
 
+  console.log("Mensaje recibido:", body);
+
   for (const { check, run, permission } of Object.values(commands)) {
     if (check(body)) {
       const hasPerm = await getHasPermission(message, chat, permission);
