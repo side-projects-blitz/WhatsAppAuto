@@ -1,23 +1,25 @@
-import WAWebJS from "whatsapp-web.js";
-import { Permission } from "../enums/permission.enum";
-import { getIsAdmin } from "./getIsAdmin";
+import WAWebJS from 'whatsapp-web.js';
+
+import { Permission } from '../enums/permission.enum';
+
+import { getIsAdmin } from './getIsAdmin';
 
 export async function getHasPermission(
-  message: WAWebJS.Message,
-  chat: WAWebJS.Chat,
-  permission: Permission
+    message: WAWebJS.Message,
+    chat: WAWebJS.Chat,
+    permission: Permission
 ): Promise<boolean> {
-  const isAdmin = getIsAdmin(message, chat);
-  const isMe = message.fromMe;
+    const isAdmin = getIsAdmin(message, chat);
+    const isMe = message.fromMe;
 
-  switch (permission) {
+    switch (permission) {
     case Permission.ADMIN:
-      return isAdmin;
+        return isAdmin;
     case Permission.ME:
-      return isMe;
+        return isMe;
     case Permission.EVERYONE:
-      return true;
+        return true;
     default:
-      return false;
-  }
+        return false;
+    }
 }

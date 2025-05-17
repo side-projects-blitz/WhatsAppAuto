@@ -1,4 +1,4 @@
-import './bot'
+import './bot';
 
 // import { Client, LocalAuth, Message } from "whatsapp-web.js";
 

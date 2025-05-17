@@ -1,22 +1,20 @@
-import WAWebJS from "whatsapp-web.js";
-import { getRandomHitMessage } from "../utils/getRandomAction";
-import { getMentionInfoFromQuote } from "../utils/getMentionInfo";
+import WAWebJS from 'whatsapp-web.js';
 
-export const handleKick = async (
-  message: WAWebJS.Message,
-  chat: WAWebJS.Chat
-) => {
-  const info = await getMentionInfoFromQuote(message);
+import { getMentionInfoFromQuote } from '../utils/getMentionInfo';
+import { getRandomHitMessage } from '../utils/getRandomAction';
 
-  if (!info) {
-    message.reply("❌ Responde el mensaje de alguien que quieras patear");
-    return;
-  }
+export const handleKick = async (message: WAWebJS.Message, chat: WAWebJS.Chat) => {
+    const info = await getMentionInfoFromQuote(message);
 
-  const { fromJid, quotedJid, fromMention, quotedMention } = info;
-  const messageText = getRandomHitMessage(fromMention, quotedMention);
+    if (!info) {
+        message.reply('❌ Responde el mensaje de alguien que quieras patear');
+        return;
+    }
 
-  chat.sendMessage(messageText, {
-    mentions: [fromJid, quotedJid],
-  });
+    const { fromJid, quotedJid, fromMention, quotedMention } = info;
+    const messageText = getRandomHitMessage(fromMention, quotedMention);
+
+    chat.sendMessage(messageText, {
+        mentions: [fromJid, quotedJid] as unknown as WAWebJS.Contact[],
+    });
 };

@@ -1,4 +1,4 @@
-import { TemplatePoints } from "../interfaces/templatePoints";
+import { TemplatePoints } from '../interfaces/templatePoints';
 
 export let templatePoints: TemplatePoints | undefined = undefined;
 

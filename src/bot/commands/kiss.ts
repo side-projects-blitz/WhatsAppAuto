@@ -1,22 +1,20 @@
-import WAWebJS from "whatsapp-web.js";
-import { getMentionInfoFromQuote } from "../utils/getMentionInfo";
-import { getRandomKissMessage } from "../utils/getRandomAction";
+import WAWebJS from 'whatsapp-web.js';
 
-export const handleKiss = async (
-  message: WAWebJS.Message,
-  chat: WAWebJS.Chat
-) => {
-  const info = await getMentionInfoFromQuote(message);
+import { getMentionInfoFromQuote } from '../utils/getMentionInfo';
+import { getRandomKissMessage } from '../utils/getRandomAction';
 
-  if (!info) {
-    message.reply("❌ Responde un mensaje de alguien para darle un beso");
-    return;
-  }
+export const handleKiss = async (message: WAWebJS.Message, chat: WAWebJS.Chat) => {
+    const info = await getMentionInfoFromQuote(message);
 
-  const { fromJid, quotedJid, fromMention, quotedMention } = info;
-  const messageText = getRandomKissMessage(fromMention, quotedMention);
+    if (!info) {
+        message.reply('❌ Responde un mensaje de alguien para darle un beso');
+        return;
+    }
 
-  chat.sendMessage(messageText, {
-    mentions: [fromJid, quotedJid],
-  });
+    const { fromJid, quotedJid, fromMention, quotedMention } = info;
+    const messageText = getRandomKissMessage(fromMention, quotedMention);
+
+    chat.sendMessage(messageText, {
+        mentions: [fromJid, quotedJid],
+    });
 };
