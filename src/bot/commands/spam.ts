@@ -1,4 +1,4 @@
-import { Chat, ChatId, Contact } from 'whatsapp-web.js';
+import { Chat, ChatId } from 'whatsapp-web.js';
 
 import { hiatusList } from '../data/hiatusList';
 
@@ -21,6 +21,6 @@ export const sendSpam = async (chat: Chat) => {
     }
 
     chat.sendMessage(mentionText.trim(), {
-        mentions: mentions as unknown as Contact[],
+        mentions,
     });
 };

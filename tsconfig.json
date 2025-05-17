@@ -5,12 +5,12 @@
         "target": "ES2020",
         "module": "commonjs",
         "rootDir": "src",
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["src/*"],
-            "@utils/*": ["src/utils/*"],
-            "@bot/*": ["src/bot/*"]
-        },
+        // "baseUrl": ".",
+        // "paths": {
+        //     "@/*": ["src/*"],
+        //     "@utils/*": ["src/utils/*"],
+        //     "@bot/*": ["src/bot/*"]
+        // },
         "outDir": "dist",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,

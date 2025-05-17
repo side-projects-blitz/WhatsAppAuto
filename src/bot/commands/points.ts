@@ -29,7 +29,7 @@ export const handleAddPoints = async (message: WAWebJS.Message, chat: WAWebJS.Ch
             .replace(/{total}/g, formatter.format(totalPoints));
 
         chat.sendMessage(formattedMessage, {
-            mentions: mentions,
+            mentions,
         });
     } else {
         chat.sendMessage(

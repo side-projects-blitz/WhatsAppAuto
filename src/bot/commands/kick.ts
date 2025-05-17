@@ -15,6 +15,6 @@ export const handleKick = async (message: WAWebJS.Message, chat: WAWebJS.Chat) =
     const messageText = getRandomHitMessage(fromMention, quotedMention);
 
     chat.sendMessage(messageText, {
-        mentions: [fromJid, quotedJid] as unknown as WAWebJS.Contact[],
+        mentions: [fromJid, quotedJid],
     });
 };
