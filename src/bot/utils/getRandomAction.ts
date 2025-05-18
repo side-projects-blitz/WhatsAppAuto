@@ -37,3 +37,32 @@ export const getRandomDryHugMessage = (fromMention: string, quotedMention: strin
 
     return messages[Math.floor(Math.random() * messages.length)];
 };
+
+export const getUnimplementedCommandMessage = () => {
+    const messages = [
+        `Comando no disponible... cuando esté listo te llamamos 📞`,
+        `El desarrollador no cobra lo suficiente para implementar eso`,
+        `Ese comando está... en "planeación" desde 2024`,
+        `Claro que sí, campeón, muy pronto lo tendrás`,
+        `Ese comando no está listo, pero soñar es gratis ✨`,
+        `Tntento interesante... pero no, no existe ese comando 🚫`,
+        `Si escribes más fuerte tal vez lo programen más rápido 🧠💥`,
+        `Este bot no hace milagros. Aún. 🔮`,
+    ];
+
+    return messages[Math.floor(Math.random() * messages.length)];
+};
+
+export const getNoPermissionCommandMessage = () => {
+    const messages = [
+        `Qué lindo que lo intentaste, pero no tienes permiso`,
+        `Este comando no es para gente como tú`,
+        `Acceso denegado. Vuelve pronto con un mejor plan`,
+        `Lo siento, reservado para gente importante`,
+        `Si fueras admin podrías usarlo. Pero no lo eres.`,
+        `Acceso denegado. Puedes presentar una queja con el jefe`,
+        `Este comando te queda grande por ahora 🚫`,
+    ];
+
+    return messages[Math.floor(Math.random() * messages.length)];
+};

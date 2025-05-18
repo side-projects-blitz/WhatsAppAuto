@@ -13,13 +13,13 @@ export async function getHasPermission(
     const isMe = message.fromMe;
 
     switch (permission) {
-    case Permission.ADMIN:
-        return isAdmin;
-    case Permission.ME:
-        return isMe;
-    case Permission.EVERYONE:
-        return true;
-    default:
-        return false;
+        case Permission.ADMIN:
+            return isAdmin;
+        case Permission.ME:
+            return isMe;
+        case Permission.EVERYONE:
+            return true;
+        default:
+            return false;
     }
 }

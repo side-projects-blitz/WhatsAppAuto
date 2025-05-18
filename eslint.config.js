@@ -27,7 +27,6 @@ export default defineConfig([
 
     // Reglas de TypeScript
     ...tseslint.configs.recommended,
-    eslintConfigPrettier,
 
     // Reglas personalizadas + orden de imports
     {
@@ -49,4 +48,5 @@ export default defineConfig([
             '@typescript-eslint/no-explicit-any': 'off',
         },
     },
+    eslintConfigPrettier,
 ]);
