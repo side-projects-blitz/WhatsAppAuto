@@ -1,20 +1,17 @@
 import { client } from './client';
+import { onAuthenticated } from './handlers/onAuthenticated';
+import { onAuthFailure } from './handlers/onAuthFailure';
 import { onMessageCreate } from './handlers/onMessageCreate';
 import { onQR } from './handlers/onQR';
+import { onReady } from './handlers/onReady';
 
 client.on('qr', onQR);
 
-client.on('ready', () => {
-    console.log('Bot conectado');
-});
+client.on('ready', onReady);
 
-client.on('authenticated', () => {
-    console.log('Se inició sesión correctamente');
-});
+client.on('authenticated', onAuthenticated);
 
-client.on('auth_failure', (msg) => {
-    console.error('Falló la autenticación', msg);
-});
+client.on('auth_failure', onAuthFailure);
 
 client.on('message_create', onMessageCreate);
 
